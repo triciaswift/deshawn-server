@@ -1,4 +1,3 @@
-
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -7,13 +6,12 @@ from deshawnapi.models import City
 
 
 class CityView(ViewSet):
-
     def retrieve(self, request, pk=None):
         # Step 1: Get a single city based on the primary key in the request URL
         city = City.objects.get(pk=pk)
 
         # Step 2: Serialize the city record as JSON
-        serialized = CitySerializer(city, context={'request': request})
+        serialized = CitySerializer(city, context={"request": request})
 
         # Step 3: Send JSON response to client with 200 status code
         return Response(serialized.data, status=status.HTTP_200_OK)
@@ -30,8 +28,9 @@ class CityView(ViewSet):
 
 
 class CitySerializer(serializers.ModelSerializer):
-
     class Meta:
-        model = City
-        fields = ('id', 'name',)
-
+        model = City  # Specify which database model to use
+        fields = (
+            "id",
+            "name",
+        )  # Specify which fields in the model should be in final JSON string
