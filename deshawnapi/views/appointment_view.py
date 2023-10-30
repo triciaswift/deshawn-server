@@ -28,7 +28,7 @@ class AppointmentView(ViewSet):
         appointment.walker = walker_instance
 
         # Assign the appointment date using the request body value
-        appointment.date = request.data["appointmentDate"]
+        appointment.date = request.data["date"]
 
         # Performs the INSERT statement into the deshawnapi_appontment table
         appointment.save()
